@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% load catalog_filters %}
+{% block site_wrapper %}
+				<center id="img_full">
+					<div id="img_full_in">
+						{% if product.productphoto_set.all.0.image.url %}
+                                            <img class="main_img_tov" class="marketfull_image" src="{{ product.productphoto_set.all.0.image.url }}" alt="{{ page_title }}" height="400px" />
+                                            {% else %}
+                                                Фото товара отсутствует
+                                            {% endif %}     
+                                            <div class="clr"></div>                                  
+					{% for item in product.productphoto_set.all %}
+						<img class="prew_img_tov" src="{{ item.image.url }}" title="{{ page_title }}" alt="{{ page_title }}" height="150px"/>
+						
+					{% endfor %}
+					
+					</div>
+					</center>
+					<div id="opac_bg"></div>
+				
+<div id="wrapper">
+	<div id="sidebar" class="alignleft">
+		{% category_list request.path %}
+	</div>
+	<div id="rightblock" class="alignleft">
+		<div id="header" class="alignleft">
+			{% include 'tags/header.html' %}
+		</div>
+		<div class="clr"></div>
+			<div id="content"  class="alignleft">
+
+			<div id="contents_margin"  class="alignleft">
+				<div class="specialprice_box alignleft full_width">
+					<div class="mounts alignleft">
+						<div class="right_mount alignleft">
+						</div>
+					</div>
+					<div class="special_blocks tov_block alignleft">
+						<h1 class="title">
+                            {{ product.brand }} {{ product.name }}
+                        </h1>
+                       
+                        
+ 
+                <div style="width:400px;" class="alignleft">                                       {% if product.productphoto_set.all.0.image.url %}
+                                            <a id="main_img_tov_link" href="#" title="{{ page_title }}"><img class="main_img_tov" class="marketfull_image" src="{{ product.productphoto_set.all.0.image.url }}" alt="{{ page_title }}" height="200px" /></a>
+                                            {% else %}
+                                                Фото товара отсутствует
+                                            {% endif %}
+                                            <div>{% for item in product.productphoto_set.all %}
+<img class="prew_img_tov" src="{{ item.image.url }}" title="{{ page_title }}" alt="{{ page_title }}" height="50px"/>
+{% endfor %}</div>
+</div>
+                
+<TABLE border="0" cellpadding="0" cellspacing="0" class="tovar">
+<tr>
+                                              <td class="tov_key" >
+                                               Вид
+                                            </td>
+                                            <td class="tov_val">
+                                                {{ product.category }}
+                                            </td>
+                                        </tr>
+                                    {% if features %}
+                                        {% for feature in features %}
+                                        <tr>
+                                           <td class="tov_key" >
+                                               {{ feature.name }}
+                                            </td>
+                                            <td class="tov_val">
+                                                {{ feature.value }}
+                                            </td>
+                                        </tr>
+                                        
+                                        {% endfor %}
+                                    {% endif %}
+                                       <tr>
+                                           <td>
+
+                                            </td>
+                                            <td>
+                                                <a href="/about"><img src="{{ MEDIA_URL }}images/replica.png"/></a>
+                                            </td>
+                                        </tr>
+                                    <tr>
+                                    </tr>
+
+                             
+</TABLE>
+
+                        <TABLE border="0" cellpadding="0" cellspacing="0" class="tovar">
+      					  <tr>
+                                                  
+                                    	<td class="price_box"> 
+                                    	
+                                    	<p class="market_price">{{ product.price }} руб.</p>
+                                    	           <form method="post" action="." class="cart"> {% csrf_token %}
+                         									   {{ form.as_p }}
+                          												  <br />
+                           											 <input id="buy" type="submit" value="Купить" name="submit" alt="Купить" />
+                      							  </form>
+                                  		</td>
+                                  		<td colspan="2">
+                                  		                                     <p class="market_desc">
+                                               {{ product.mini_description }}
+                                            </p>
+                                  		</td>
+                                    </tr>
+             
+</TABLE>
+
+
+
+					</div>
+				</div>
+				<div class="clr"></div>
+			</div>
+		</div>
+	</div>
+
+
+					<div class="seo_colum alignleft" >
+			<h1 class="seo_header">
+                Описание
+            </h1>
+            <div class="seo_desc">
+                {{ product.html_description|safe }}
+				</div>
+			<div>
+			</div>
+			</div>
+			
+<div class="clr"></div>
+ {% include "tags/footer.html" %}
+</div>
+
+{% endblock %}
+
+

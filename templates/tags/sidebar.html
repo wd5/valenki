@@ -1,0 +1,30 @@
+    <div id="logotype">
+        <a href="/" title="Главная страница"><img src="{{ MEDIA_ROOT }}/static/images/logo.png"></a>
+    </div>
+    
+    <div id="sidebar_main" class="alignleft">
+    <div id="searchform_box" class="alignleft">
+   	<form id="searchform" class="alignleft" method="get" action="">
+		<div class="alignleft">
+			<input type="text" onfocus="if(this.value=='Введите слово для поиска...') this.value='';" onblur="if(this.value=='') this.value='Введите слово для поиска...';" value="Введите слово для поиска..." name="s" id="s"/>
+		</div>
+			<input class="go" type="submit" value="" />
+	</form>
+	</div>
+	<div class="clr"></div>
+        <div id="sidebar_menu">
+        <ul>
+        {% for section in sections %}
+     			<li>{{ section.name}}         
+                    <ul class="sidebar_menu">
+                        {% for category in section.category_set.all %}
+                            <li>
+                                <a href="{{ category.get_absolute_url }}" title="">{{ category.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+        {% endfor %}
+        </ul>
+        </div>
+    </div>

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load catalog_filters %}
+{% block site_wrapper %}
+<div id="wrapper">
+	<div id="sidebar" class="alignleft">
+		{% category_list request.path %}
+	</div>
+	<div id="rightblock" class="alignleft">
+		<div id="header" class="alignleft">
+			{% include 'tags/header.html' %}
+		</div>
+		<div class="clr"></div>
+		<div id="content"  class="alignleft">
+
+			<div id="contents_margin"  class="alignleft">
+
+		<div class="static alignleft" >
+			<h1 class="seo_header">
+                О нас
+            </h1>
+            <div class="seo_desc">
+                <p>
+                    ООО «Диджей сторе» <br>
+                    Юридический адрес: 123244,  г. Москва, ул. Гризодубовой, д.1 кв.10. <br>
+                    ОГРН 5087746135824 <br>
+                    Тел:+7 (925) 038-94-70 <br>
+                    E-mail: topdjshop@gmail.com <br>
+                    ICQ: 625556943
+                </p>
+                <br>
+                <p>
+                    Наш интернет-магазин аудио оборудования предлагает Вашему вниманию копии престижных моделей различной музыкальной аппаратуры известных брендов. В большинстве копий использованы оригинальные детали, что делает товар почти не отличимым от подлинных моделей.
+                    Такая копия внешне идентична оригиналу и способна выполнять все его функции.
+                </p>
+
+
+				</div>
+			<div>
+			</div>
+			</div>
+
+<div class="clr"></div>
+ {% include "tags/footer.html" %}
+</div>
+
+{% endblock %}

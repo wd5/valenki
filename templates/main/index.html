@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load catalog_filters %}
+{% block site_wrapper %}
+<div id="wrapper">
+	<div id="sidebar" class="alignleft">
+		{% category_list request.path %}
+	</div>
+	<div id="rightblock" class="alignleft">
+		<div id="header" class="alignleft">
+			{% include 'tags/header.html' %}
+		</div>
+		<div class="clr"></div>
+			<div id="content"  class="alignleft">
+			<div id="contents_margin"  class="alignleft">
+				<div class="specialprice_box alignleft">
+					<div class="mounts alignleft">
+						<div class="right_mount alignleft">
+						</div>
+					</div>
+					<div class="special_blocks alignleft">
+						<h1 class="title">
+                            Специальная цена
+                        </h1>
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                            {% for item in special_prices %}
+                                <td width="33%">
+                                    <div class="market_wrapper">
+                                        <center>
+                                            <a href="{{ item.get_absolute_url }}" title="{{ item.name }}"><img class="market_image" src="{{ item.productphoto_set.all.0.image.thumb_url }}" alt="{{ item.name }}" /></a>
+                                             <p><a class="market_name" href="{{ item.get_absolute_url }}" title="{{ item.name }}"><span>{{ item.brand }} {{ item.name }}</span></a></p>
+                                            <p class="market_price">{{ item.price }} руб.</p>
+                                            <p class="market_desc">
+                                               {{ item.mini_description }}
+                                            </p>
+                       			        </center>
+                                    </div>
+                                </td>
+                            {% endfor %}
+                            </tr>
+                        </table>
+					</div>
+					<div class="redlable_box">
+						<div class="redlable">
+							<div class="redlable_right">
+								<div class="redlable_inner">
+									<a href="#"> Все товары по специальной цене</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clr"></div>
+				<div class="specialprice_box alignleft" >
+					<div class="mounts alignleft">
+						<div class="right_mount alignleft">
+						</div>
+					</div>
+					<div  class="special_blocks alignleft">
+                        <h1 class="title">
+                             Лидеры продаж
+                        </h1>
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                            {% for item in bestsellers %}
+                                <td width="33%">
+                                    <div class="market_wrapper">
+                                        <center>
+                                            <a href="{{ item.get_absolute_url }}" title="{{ item.name }}"><img class="market_image" src="{{ item.productphoto_set.all.0.image.thumb_url }}" alt="{{ item.name }}" /></a>
+                                            <p><a class="market_name" href="{{ item.get_absolute_url }}" title="{{ item.name }}"><span>{{ item.brand }} {{ item.name }}</span></a></p>
+                                            <p class="market_price">{{ item.price }} руб.</p>
+                                            <p class="market_desc">
+                                                {{ item.mini_description }}
+                                            </p>
+                                        </center>
+                                    </div>
+                                </td>
+                            {% endfor %}
+                            </tr>
+                        </table>
+					</div>
+					<div class="redlable_box">
+						<div class="redlable">
+							<div class="redlable_right">
+								<div class="redlable_inner">
+									<a href="#"> Все лидеры</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+
+			</div>
+		</div>
+	</div>
+
+
+				<!--	<div class="seo_colum alignleft" >
+			<h1 class="seo_header">
+                SEO колонка
+            </h1>
+            <div class="seo_desc">
+                <p>
+                    Ultrices nascetur! Habitasse, dis vel tincidunt ultrices placerat et turpis diam elementum adipiscing. Dolor facilisis nascetur nec odio, etiam rhoncus, tincidunt porttitor integer nascetur! Eu amet cras urna lorem vel pulvinar natoque, nec, mauris elementum magnis, parturient massa duis turpis in augue amet! Nec mattis enim nunc tincidunt, quis a! Lectus pulvinar, nunc rhoncus, augue velit ultricies non, cras magna nunc tincidunt aliquam dictumst, in ridiculus. Nascetur magna magna dolor! Arcu habitasse, in nisi, tortor, porta phasellus ac in adipiscing montes phasellus placerat dolor scelerisque, pid non augue elementum quis, ut ac non habitasse non est hac et integer egestas tortor cras phasellus risus nisi, elementum ridiculus, magnis porta, et magna massa est et dapibus tortor. Ut duis habitasse sociis.
+                </p>
+                <p>
+                    Ultrices nascetur! Habitasse, dis vel tincidunt ultrices placerat et turpis diam elementum adipiscing. Dolor facilisis nascetur nec odio, etiam rhoncus, tincidunt porttitor integer nascetur! Eu amet cras urna lorem vel pulvinar natoque, nec, mauris elementum magnis, parturient massa duis turpis in augue amet! Nec mattis enim nunc tincidunt, quis a! Lectus pulvinar, nunc rhoncus, augue velit ultricies non, cras magna nunc tincidunt aliquam dictumst, in ridiculus. Nascetur magna magna dolor! Arcu habitasse, in nisi, tortor, porta phasellus ac in adipiscing montes phasellus placerat dolor scelerisque, pid non augue elementum quis, ut ac non habitasse non est hac et integer egestas tortor cras phasellus risus nisi, elementum ridiculus, magnis porta, et magna massa est et dapibus tortor. Ut duis habitasse sociis.
+                </p>
+					
+				</div>
+			<div>
+			</div>
+			</div>-->
+
+<div class="clr"></div>
+ {% include "tags/footer.html" %}
+</div>
+
+{% endblock %}
+
+

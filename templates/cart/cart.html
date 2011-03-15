@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load catalog_filters %}
+{% block site_wrapper %}
+<div id="wrapper">
+	<div id="sidebar" class="alignleft">
+		{% category_list request.path %}
+	</div>
+	<div id="rightblock" class="alignleft">
+		<div id="header" class="alignleft">
+			{% include 'tags/header.html' %}
+		</div>
+		<div class="clr"></div>
+			<div id="content"  class="alignleft">
+			<div id="contents_margin"  class="alignleft">
+				<div class="specialprice_box alignleft" style="min-height: 500px;">
+					<div class="mounts alignleft">
+						<div class="right_mount alignleft">
+						</div>
+					</div>
+					<div class="special_blocks alignleft">
+					 {% if cart_items %}
+						<h1 class="title">
+                           Ваш заказ
+                        </h1>
+                       <table id="basket_table" border="0" cellpadding="0" cellspacing="0" class="order_tab">
+                       		<tr class="basket_table_head">
+                       			<td></td>
+                       			<td class="basket_table_dotted">Наименование</td>
+                       			<td class="basket_table_dotted">Количество</td>
+                       			<td class="basket_table_dotted">Цена</td>
+                       			<td></td>
+                       		</tr>
+                       		{% for item in cart_items %}
+                       		<tr class="basket_table_main">
+                       			<td><img src="{{ item.product.productphoto_set.all.0.image.thumb_url }}" height="100"/></td>
+                       			<td class="basket_table_name"><a href="{{ item.product.get_absolute_url }}" title="{{ item.product.name }}" class="basket_market_name">{{ item.product.brand }} {{ item.product.name }}</a></td>
+                       			<td class="basket_table_col"> 
+                       			<form method="post" action="." class="cart"> 
+                       					{% csrf_token %}
+                                      <input type="text" name="quantity" value="{{ item.quantity }}" id="quantity" size="2" class="quantity" maxlength="5" onblur="if(this.value=='') this.value='{{ item.quantity }}';" onfocus="if(this.value=='{{ item.quantity }}') this.value='';" />
+                                      <input type="hidden" name="item_id" value="{{ item.id }}" />
+                                     <input class="reload" type="submit" name="Update" value=""/>
+                                 </form>
+                                </td>
+                       			<td  class="basket_table_price"><b class="basket_price">{{ item.product.price }} руб.<b/></td>
+                       			<td>
+                       			                  <form method="post" action="." class="cart_d"> {% csrf_token %}
+                                                        <input type="hidden" name="item_id" value="{{ item.id }}" />
+                                                        <input class="del" type="submit" name="Remove" value=""/>
+                                                    </form>
+                       			</td>
+                       		</tr>
+                       		{% endfor %}
+                       		<tr class="basket_table_foot1">
+                       			<td></td>
+                       			<td class="basket_table_dot1"></td>
+                       			<td class="basket_table_dot1">ОБЩАЯ СТОИМОСТЬ</td>
+                       			<td class="basket_table_dot1">				
+                       			<b>
+														{{ cart_subtotal }} РУБ												
+								</b>
+								</td>
+                       		</tr>
+                       		<tr class="basket_table_foot2">
+                       			<td></td>
+                       			<td class="basket_table_dot2"></td>
+                       		    <td class="basket_table_dot2">СКИДКА</td>
+                       			<td class="basket_table_dot2">0.00 РУБ</td>
+                       		</tr>
+								<td></td>
+                       			<td class="pre_send" colspan="2">
+                       			<p>Пожалуйста, заполните контактную информацию:</p>
+						<p>Области, отмеченные звёздочкой, должны быть заполнены.</p>
+                       			</td>
+                       		   				<form method="post" action="." class="cart"> {% csrf_token %}
+                                             <td>  {{ form.as_table }}</td>
+                                              <td></td><td></td><td></td>
+                                               <td> <input class="send_button" type="submit" value="сделать заказ" name="Good" alt="сделать заказ" /> </td>
+                                            </form>
+                              
+   						</table>
+
+   				    {% else %}{% if is_order %}
+                                        Спасибо за заказ, в ближайшее время мы с вами свяжемся.
+                                    {% else %}
+                                        Ваша корзина пуста
+                                    {% endif %}{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<!--	<div class="seo_colum alignleft" >
+			<h1 class="seo_header">
+                SEO колонка
+            </h1>
+            <div class="seo_desc">
+                <p>
+                    Ultrices nascetur! Habitasse, dis vel tincidunt ultrices placerat et turpis diam elementum adipiscing. Dolor facilisis nascetur nec odio, etiam rhoncus, tincidunt porttitor integer nascetur! Eu amet cras urna lorem vel pulvinar natoque, nec, mauris elementum magnis, parturient massa duis turpis in augue amet! Nec mattis enim nunc tincidunt, quis a! Lectus pulvinar, nunc rhoncus, augue velit ultricies non, cras magna nunc tincidunt aliquam dictumst, in ridiculus. Nascetur magna magna dolor! Arcu habitasse, in nisi, tortor, porta phasellus ac in adipiscing montes phasellus placerat dolor scelerisque, pid non augue elementum quis, ut ac non habitasse non est hac et integer egestas tortor cras phasellus risus nisi, elementum ridiculus, magnis porta, et magna massa est et dapibus tortor. Ut duis habitasse sociis.
+                </p>
+                <p>
+                    Ultrices nascetur! Habitasse, dis vel tincidunt ultrices placerat et turpis diam elementum adipiscing. Dolor facilisis nascetur nec odio, etiam rhoncus, tincidunt porttitor integer nascetur! Eu amet cras urna lorem vel pulvinar natoque, nec, mauris elementum magnis, parturient massa duis turpis in augue amet! Nec mattis enim nunc tincidunt, quis a! Lectus pulvinar, nunc rhoncus, augue velit ultricies non, cras magna nunc tincidunt aliquam dictumst, in ridiculus. Nascetur magna magna dolor! Arcu habitasse, in nisi, tortor, porta phasellus ac in adipiscing montes phasellus placerat dolor scelerisque, pid non augue elementum quis, ut ac non habitasse non est hac et integer egestas tortor cras phasellus risus nisi, elementum ridiculus, magnis porta, et magna massa est et dapibus tortor. Ut duis habitasse sociis.
+                </p>
+					
+				</div>
+			<div>
+			</div>
+			</div>-->
+			
+<div class="clr"></div>
+ {% include "tags/footer.html" %}
+</div>
+
+{% endblock %}

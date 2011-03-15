@@ -1,6 +1,6 @@
-# Django settings for valenki project.
+import os
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -11,7 +11,7 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': '', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': '',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
@@ -31,7 +31,7 @@ TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-RU'
 
 SITE_ID = 1
 
@@ -45,12 +45,13 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ''
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'static')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/static/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -58,7 +59,7 @@ MEDIA_URL = ''
 ADMIN_MEDIA_PREFIX = '/media/'
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'k3rx_93bhyf@sf=5ea(wr%&9kc445fye*x2g-w2sl4@i2c(ip8'
+SECRET_KEY = '#3j2j!%6b*^riok)ca^$^*m77l5x(yrf=u@f7r7emnbvd@z@nc'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -77,7 +78,9 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'valenki.urls'
 
-TEMPLATE_DIRS = ('/Users/freebsdstuff/PycharmProjects/valenki/templates',)
+TEMPLATE_DIRS = (
+    os.path.join(PROJECT_PATH, 'templates')
+)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -85,8 +88,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
+    'valenki.catalog',
+    'valenki.cart',
     # 'django.contrib.admindocs',
 )
+
+try:
+    from local_settings import *
+except ImportError:
+    pass

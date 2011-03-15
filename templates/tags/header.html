@@ -1,0 +1,25 @@
+{% load catalog_filters %}
+			<div id="phoneicq" class="alignleft">
+				<h5>Интернет-магазин аудио оборудования</h5>
+				<p id="header_phone"><span>+7 (925)</span> 038-94-70</p>
+				<p id="header_icq">625-556-943</p>
+			</div>
+			<div id="basket" class="alignright">
+				<div id="basket_mounts">
+					<div class="basket_mounts">
+					</div>
+					<!--<p>Добро пожаловать,</p>
+					<p><a href="#">пользователь</a></p>-->
+				</div>
+				<div id="bascket_container">
+					<div id="headphones">
+					</div>
+					<p class="bask">Корзина</p>
+					 {% cart_box request %}
+					<!-- <p class="login"><a href="#">Войти</a> * <a href="#">Регистрация</a></p>-->
+				</div>
+			</div>
+			<div class="clr"></div>
+			<div id="menu" class="alignleft">
+				{% include 'tags/menu.html' %}
+			</div>
