@@ -6,8 +6,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^', include('topdjshop.catalog.urls')),
-    (r'^cart/', include('topdjshop.cart.urls')),
+    (r'^', include('valenki.catalog.urls')),
+    (r'^cart/', include('valenki.cart.urls')),
     (r'^admin/', include(admin.site.urls)),
 )
 
