@@ -28,7 +28,7 @@ def show_product(request, product_slug):
     product = get_object_or_404(Product, slug=product_slug)
     photos = product.productphoto_set.all()
     features = product.feature_set.all()
-    page_title = "%s %s" % (product.brand, product)
+    page_title = u"%s %s" % (product.brand, product)
     meta_keywords = page_title
     meta_description = "%s - %s" % (page_title, product.mini_description)
 
