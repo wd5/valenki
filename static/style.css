@@ -15,7 +15,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	font-size: 100%;
 	font-family: inherit;
 	/*vertical-align: baseline;*/
-	font-family: Arial,Helvetica sans-serif;
+	font-family: Verdana,Arial,Helvetica sans-serif;
 }
 .alignleft{
 	float: left;
@@ -33,7 +33,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	margin:0 50px;
 	min-width: 900px;
 	float:left;	
-	background: url('/static/images/wrap_bg.png') no-repeat 11px 100%;
+/*	background: url('/static/images/wrap_bg.png') no-repeat 11px 100%;*/
 }
 #rightblock{
 	min-width: 650px;
@@ -179,7 +179,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 	position: relative;
 	width:202px;
 	height: 33px;
-	background: url('/static/images/mount.png') no-repeat 21px 0px;
+	/*background: url('/static/images/mount.png') no-repeat 21px 0px;*/
 	font-size:12px;
 	color:#48484a;
 	padding-top:6px;
@@ -199,7 +199,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 	right:21px;
 	width: 38px;
 	height: 39px;
-	background: url('/static/images/mount.png') no-repeat top left;
+	/*background: url('/static/images/mount.png') no-repeat top left;*/
 }
 #bascket_container{
 	position: relative;
@@ -308,7 +308,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 	position: relative;
 	width:100%;
 	height:40px;
-	background: url('/static/images/mount_content.png') no-repeat 30px 0px;
+	/*background: url('/static/images/mount_content.png') no-repeat 30px 0px;*/
 }
 #content .right_mount{
 	position: absolute;
@@ -316,7 +316,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 	height: 40px;
 	top:0;
 	right:30px;
-	background: url('/static/images/mount_content.png') no-repeat top left;
+	/*background: url('/static/images/mount_content.png') no-repeat top left;*/
 
 } 
 .special_blocks{
