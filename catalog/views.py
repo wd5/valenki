@@ -59,10 +59,18 @@ def about(request):
     page_title = "О нас"
     return render_to_response('main/about.html', locals(), context_instance=RequestContext(request))
 
-def blog(request):
-    page_title = "Блог"
-    return render_to_response('main/blog.html', locals(), context_instance=RequestContext(request))
-
 def delivery(request):
-    page_title = "Доставка и оплата"
+    page_title = "Доставка"
     return render_to_response('main/delivery.html', locals(), context_instance=RequestContext(request))
+
+def size(request):
+    page_title = "Как подобрать размер"
+    return render_to_response('main/size.html', locals(), context_instance=RequestContext(request))
+
+def buy(request):
+    page_title = "Как купить"
+    return render_to_response('main/buy.html', locals(), context_instance=RequestContext(request))
+
+def contract(request):
+    page_title = "Договор"
+    return render_to_response('main/contract.html', locals(), context_instance=RequestContext(request))

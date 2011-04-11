@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load catalog_filters %}
+{% block site_wrapper %}
+<div id="wrapper">
+	<div id="sidebar" class="alignleft">
+		{% category_list request.path %}
+	</div>
+	<div id="rightblock" class="alignleft">
+		<div id="header" class="alignleft">
+			{% include 'tags/header.html' %}
+		</div>
+		<div class="clr"></div>
+		<div id="content"  class="alignleft">
+
+			<div id="contents_margin"  class="alignleft">
+
+		<div class="static alignleft" >
+			<h1 class="seo_header">
+                Доставка и оплата
+            </h1>
+            <div class="seo_desc">
+                <p>
+                    Доставка по Москве осуществляется курьером в пределах МКАД. <br>
+                    Стоимость доставки 200 руб. При заказе от 5000 руб. доставка бесплатно. <br>
+                    Оплата на месте. <br><br>
+                </p>
+                <p>
+                    Доставка по России осуществляется через службу EMS. <br>
+                    Стоимость доставки зависит от региона. <br><br>
+                </p>
+                <p>
+                    Возможен самовывоз, подробности по телефону.
+                </p>
+				</div>
+			<div>
+			</div>
+			</div>
+
+<div class="clr"></div>
+ {% include "tags/footer.html" %}
+</div>
+{% endblock %}
