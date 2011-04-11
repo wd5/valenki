@@ -74,3 +74,7 @@ def buy(request):
 def contract(request):
     page_title = "Договор"
     return render_to_response('main/contract.html', locals(), context_instance=RequestContext(request))
+
+def contacts(request):
+    page_title = "Договор"
+    return render_to_response('main/contacts.html', locals(), context_instance=RequestContext(request))

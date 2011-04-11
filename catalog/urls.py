@@ -8,5 +8,6 @@ urlpatterns = patterns('',
                       url(r'^delivery$', 'catalog.views.delivery', name="delivery-page"),
                       url(r'^size$', 'catalog.views.size', name="size-page"),
                       url(r'^buy$', 'catalog.views.buy', name="buy-page"),
-                      url(r'^contract$', 'catalog.views.contract', name="contract-page"),)
+                      url(r'^contract$', 'catalog.views.contract', name="contract-page"),
+                      url(r'^contacts$', 'catalog.views.contacts', name="contacts-page"),)
 
