@@ -3,7 +3,8 @@ from models import CartItem, Client
 from catalog.models import *
 from django.shortcuts import get_object_or_404
 from django.core.mail import send_mail
-import threading
+import threading, urllib2, urllib
+from hashlib import md5
 import decimal
 import random
 import settings
@@ -115,17 +116,17 @@ def save_client(request, form):
     ci.email = form.cleaned_data['email']
     ci.save()
 
-def send_admin_email(cart_items, form, cart_subtotal):
+def send_admin_email(request, cart_items, form, cart_subtotal):
     products_for_email = ""
     for item in cart_items:
-        products_for_email += u"%s %s:%s шт  http://topdjshop.ru%s\n" % (item.product.brand,
+        products_for_email += u"%s %s:%s шт  http://kupit-valenki.ru%s\n" % (item.product.brand,
                                               item.product.name, item.quantity, item.product.get_absolute_url())
     t = threading.Thread(target= send_mail, args=[
         u'Заказ от %s %s' % (form.cleaned_data['name'], form.cleaned_data['surname'] ),
-        u'Имя: %s %s %s \nГород: %s\nИндекс: %s\nТелефон: %s\nАдрес: %s\nEmail: %s\n\n%s\nВсего на сумму: %s руб'
+        u'Имя: %s %s %s \nГород: %s\nИндекс: %s\nТелефон: %s\nАдрес: %s\nEmail: %s\n\n%s\nВсего на сумму: %s руб\nПришел с: %s'
         % (form.cleaned_data['surname'], form.cleaned_data['name'], form.cleaned_data['patronymic'],
         form.cleaned_data['city'], form.cleaned_data['postcode'], form.cleaned_data['phone'],
-        form.cleaned_data['address'], form.cleaned_data['email'], products_for_email, cart_subtotal),
+        form.cleaned_data['address'], form.cleaned_data['email'], products_for_email, cart_subtotal, request.COOKIES.get('REFERRER', None)),
         settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER], 'fail_silently=False'])
     t.setDaemon(True)
     t.start()
@@ -133,12 +134,25 @@ def send_admin_email(cart_items, form, cart_subtotal):
 def send_client_email(cart_items, form, cart_subtotal):
     products_for_email = ""
     for item in cart_items:
-        products_for_email += u"%s %s:%s шт  http://topdjshop.ru%s\n" % (item.product.brand,
+        products_for_email += u"%s %s:%s шт  http://kupit-valenki.ru%s\n" % (item.product.brand,
                                               item.product.name, item.quantity, item.product.get_absolute_url())
     t = threading.Thread(target= send_mail, args=[
-        u'Ваш заказ от topdjshop',
-        u'Здравствуйте %s,\n\nВы оформили у нас заказ на:\n%s\nВсего на сумму: %s руб\n\nВ ближайшее время наш менеджер с вами свяжется.\nС Уважением, topdjshop.ru' %
+        u'Ваш заказ от Купить-валенки.ру',
+        u'Здравствуйте %s,\n\nВы оформили у нас заказ на:\n%s\nВсего на сумму: %s руб\n\nВ ближайшее время наш менеджер с вами свяжется.\nС Уважением, kupit-valenki.ru' %
         (form.cleaned_data['name'], products_for_email, cart_subtotal ),
         settings.EMAIL_HOST_USER, [form.cleaned_data['email']], 'fail_silently=False'])
     t.setDaemon(True)
     t.start()
+
+def send_sms(cart_items, form):
+    login = 'east.belle88@gmail.com'
+    password = 'nscrfrren'
+    phones = ["79274544472", "79033887085"]
+    from_phone = form.cleaned_data['phone']
+    products = ""
+    for item in cart_items:
+        products += "%sx%s" % (item.product.slug, item.quantity)
+    msg = "%s,%s %s" % (form.cleaned_data['name'], form.cleaned_data['city'], products)
+    msg = urllib.urlencode({'msg': msg.encode('cp1251')})
+    for to_phone in phones:
+        urllib2.urlopen('http://sms48.ru/send_sms.php?login=%s&to=%s&%s&from=%s&check2=%s' % (login, to_phone, msg.encode('cp1251'), from_phone, md5(login + md5(password).hexdigest() + to_phone).hexdigest()) )

@@ -2,6 +2,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from catalog.forms import OrderForm
+from settings import SEND_SMS
 import cart
 
 def show_cart(request, template_name="cart/cart.html"):
@@ -21,7 +22,10 @@ def show_cart(request, template_name="cart/cart.html"):
             # Удаляю сессию у клиента
             del request.session['cart_id']
             is_order = 1
-            cart.send_admin_email(cart_items, form, cart_subtotal)
+            # Отправляем админу смс
+            if SEND_SMS:
+                cart.send_sms(cart_items, form)
+            cart.send_admin_email(request, cart_items, form, cart_subtotal)
             if form.cleaned_data['email']:
                 cart.send_client_email(cart_items, form, cart_subtotal)
     else:

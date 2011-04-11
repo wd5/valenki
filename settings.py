@@ -74,6 +74,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'valenki.ReferMiddleware.ReferMiddleware',
 )
 
 ROOT_URLCONF = 'valenki.urls'
